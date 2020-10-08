@@ -1,5 +1,6 @@
-import 'package:meta/meta.dart' show required;
-import 'package:todo_app/models/user.dart';
+import 'package:meta/meta.dart';
+
+import 'user.dart';
 
 class Event {
   final String id;

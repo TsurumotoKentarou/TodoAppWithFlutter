@@ -3,10 +3,10 @@ import 'package:todo_app/blocs/event_list/event_list_repository.dart';
 import 'package:todo_app/models/event.dart';
 
 class FirestoreEventListRepository extends EventListRepository {
-  final Firestore _firestore;
+  final FirebaseFirestore _firestore;
 
-  FirestoreEventListRepository({Firestore firestore})
-      : _firestore = firestore ?? Firestore.instance;
+  FirestoreEventListRepository({FirebaseFirestore firestore})
+      : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
   Stream<List<Event>> fetch() {

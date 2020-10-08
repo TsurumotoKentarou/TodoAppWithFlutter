@@ -11,13 +11,14 @@ class FirestoreEventListRepository extends EventListRepository {
   @override
   Stream<List<Event>> fetch() {
     return _firestore.collection("events").snapshots().map((snapshot) {
-      return snapshot.documents.map((docs) {
+      return snapshot.docs.map((docs) {
+        Map<String, dynamic> data = docs.data();
         return Event(
-          id: docs.documentID,
-          title: docs.data["title"] ?? "",
-          description: docs.data["description"] ?? "",
-          date: docs.data["date"]?.toDate() ?? DateTime.utc(2019),
-          imageUrl: docs.data["image_url"] ?? "",
+          id: docs.id,
+          title: data['title'] ?? "",
+          description: data["description"] ?? "",
+          date: data["date"]?.toDate() ?? DateTime.utc(2019),
+          imageUrl: data["image_url"] ?? "",
         );
       }).toList();
     });

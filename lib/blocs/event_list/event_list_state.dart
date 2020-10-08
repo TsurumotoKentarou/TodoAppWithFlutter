@@ -23,10 +23,10 @@ class EventListInProgress extends EventListState {
   String toString() => 'EventListInProgress';
 }
 
-class EventListInSuccess extends EventListState {
+class EventListSuccess extends EventListState {
   final Stream<List<Event>> eventList;
 
-  EventListInSuccess({@required this.eventList}) : assert(eventList != null);
+  EventListSuccess({@required this.eventList}) : assert(eventList != null);
 
   @override
   List<Object> get props => [this.eventList];

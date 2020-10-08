@@ -1,13 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_app/blocs/event_list/event_list_repository.dart';
 import 'package:todo_app/models/event.dart';
 
 class FirestoreEventListRepository extends EventListRepository {
+  final Firestore _firestore;
+
+  FirestoreEventListRepository({Firestore firestore})
+      : _firestore = firestore ?? Firestore.instance;
+
   @override
   Stream<List<Event>> fetch() {
-    return _firestore
-        .collection("events")
-        .snapshots()
-        .map((snapshot) {
+    return _firestore.collection("events").snapshots().map((snapshot) {
       return snapshot.documents.map((docs) {
         return Event(
           id: docs.documentID,
@@ -17,5 +20,6 @@ class FirestoreEventListRepository extends EventListRepository {
           imageUrl: docs.data["image_url"] ?? "",
         );
       }).toList();
-    }
-        }
+    });
+  }
+}
